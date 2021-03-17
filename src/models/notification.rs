@@ -7,7 +7,7 @@ use crate::diesel::{QueryDsl, RunQueryDsl, result::Error as DieselError, insert_
 
 type DbPool = web::Data<Pool>;
 
-#[derive(Queryable)]
+#[derive(Queryable, Serialize, Deserialize)]
 pub struct Notification {
   pub id: i32,
   pub price: f64,

@@ -5,7 +5,7 @@ mod handlers;
 mod models;
 mod schema;
 
-use actix_web::{dev::ServiceRequest, web, App, Error, HttpServer};
+use actix_web::{ web, App, HttpServer};
 use diesel::prelude::*;
 use diesel::r2d2::{self, ConnectionManager};
 
