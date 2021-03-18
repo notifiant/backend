@@ -1,4 +1,3 @@
-use super::user::User;
 use crate::diesel::{
   insert_into, result::Error as DieselError, ExpressionMethods, QueryDsl, RunQueryDsl,
 };
