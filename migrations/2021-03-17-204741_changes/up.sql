@@ -1,0 +1,18 @@
+-- Your SQL goes here
+DROP TABLE users;
+DROP TABLE notifications;
+
+CREATE TABLE IF NOT EXISTS users
+(
+  id SERIAL NOT NULL PRIMARY KEY,
+  username TEXT NOT NULL,
+  email TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  hash VARCHAR(128) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+  id SERIAL PRIMARY KEY NOT NULL,
+  price FLOAT NOT NULL,
+  user_id SERIAL NOT NULL REFERENCES users(id)
+);

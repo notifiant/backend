@@ -2,6 +2,7 @@ table! {
     notifications (id) {
         id -> Int4,
         price -> Float8,
+        user_id -> Int4,
     }
 }
 
@@ -11,9 +12,11 @@ table! {
         username -> Text,
         email -> Text,
         created_at -> Timestamp,
-        password -> Varchar,
+        hash -> Varchar,
     }
 }
+
+joinable!(notifications -> users (user_id));
 
 allow_tables_to_appear_in_same_query!(
     notifications,
