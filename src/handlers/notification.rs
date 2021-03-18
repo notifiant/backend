@@ -3,7 +3,7 @@ use crate::Pool;
 use actix_web::{Error, HttpResponse, delete, get, post, put, web, error::BlockingError};
 
 #[post("/notification")]
-pub async fn create_notification(
+async fn create_notification(
   item: web::Json<NewNotification>,
   db: web::Data<Pool>,
 ) -> Result<HttpResponse, Error> {
@@ -21,7 +21,7 @@ pub async fn create_notification(
 }
 
 #[get("/notifications")]
-pub async fn get_all_notifications(db: web::Data<Pool>) -> HttpResponse {
+async fn get_all_notifications(db: web::Data<Pool>) -> HttpResponse {
   let xs = web::block(move || Notification::find_all(db)).await;
 
   match xs {
@@ -31,7 +31,7 @@ pub async fn get_all_notifications(db: web::Data<Pool>) -> HttpResponse {
 }
 
 #[get("/notification/{id}")]
-pub async fn get_notification(id: web::Path<i32>, db: web::Data<Pool>) -> HttpResponse {
+async fn get_notification(id: web::Path<i32>, db: web::Data<Pool>) -> HttpResponse {
   let n = web::block(move || Notification::find_by_id(id.into_inner(), db)).await;
 
   match n {
@@ -41,7 +41,7 @@ pub async fn get_notification(id: web::Path<i32>, db: web::Data<Pool>) -> HttpRe
 }
 
 #[put("/notification/{id}")]
-pub async fn update_notification(
+async fn update_notification(
   id: web::Path<i32>,
   item: web::Json<NewNotification>,
   db: web::Data<Pool>,
@@ -55,7 +55,7 @@ pub async fn update_notification(
 }
 
 #[delete("/notification/{id}")]
-pub async fn delete_notification(id: web::Path<i32>, db: web::Data<Pool>) -> Result<HttpResponse, Error> {
+async fn delete_notification(id: web::Path<i32>, db: web::Data<Pool>) -> Result<HttpResponse, Error> {
   let res = web::block(move || Notification::delete(id.into_inner(), db)).await;
 
   match res {
